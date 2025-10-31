@@ -5,10 +5,7 @@
     state: present
     key: '{{ item }}'
   with_file:
-    - files/pavlik.pub
-    - files/petyaev.pub
-    - files/turkov.pub
-    - files/fedorin.pub
+
 
 - name: Set up multiple authorized keys for root
   authorized_key:
@@ -16,10 +13,7 @@
     state: present
     key: '{{ item }}'
   with_file:
-    - files/pavlik.pub
-    - files/petyaev.pub
-    - files/turkov.pub
-    - files/fedorin.pub
+    - files/
 
 - name: Set up multiple authorized keys for ansible
   authorized_key:
@@ -27,7 +21,4 @@
     state: present
     key: '{{ item }}'
   with_file:
-    - files/pavlik.pub
-    - files/petyaev.pub
-    - files/turkov.pub
-    - files/fedorin.pub
+    - files/

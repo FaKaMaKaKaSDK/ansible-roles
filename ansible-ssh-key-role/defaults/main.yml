@@ -1,11 +1,6 @@
 ---
 # defaults file for keys-role
 ssh_public_keyfiles_bee:
-    - files/pavlik.pub
-    - files/petyaev.pub
-    - files/turkov.pub
+
 
 ssh_public_keyfiles_ansible:
-    - files/pavlik.pub
-    - files/petyaev.pub
-    - files/turkov.pub

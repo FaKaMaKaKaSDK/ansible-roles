@@ -26,13 +26,6 @@
   loop: '{{ ufw_list_of_opened_ports }}'
   become: true
 
-- name: Allow bserv all access to host
-  community.general.ufw:
-    rule: allow
-    src: '{{ item }}'
-  loop: '{{ ufw_bserv_hosts }}'
-  become: true
-
 - name: Deny everything and enable UFW
   community.general.ufw:
     state: enabled

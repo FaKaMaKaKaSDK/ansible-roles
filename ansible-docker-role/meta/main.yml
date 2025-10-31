@@ -3,9 +3,8 @@ dependencies: []
 
 galaxy_info:
   role_name: docker
-  author: pavlik.d
+  author: fedorin.k
   description: Docker for Linux.
-  company: "Zenden"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4
   platforms:

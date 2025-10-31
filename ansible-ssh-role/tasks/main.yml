@@ -11,9 +11,9 @@
     regexp: ^#?PasswordAuthentication
     line: PasswordAuthentication no
     
-- name: Set port 58888 for ssh connection
+- name: Set port for ssh connection
   lineinfile: 
     dest: /etc/ssh/sshd_config
     regexp: ^#?Port
-    line: Port 58888
+    line: Port 
   notify: reload service sshd
