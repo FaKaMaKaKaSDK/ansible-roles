@@ -1,0 +1,49 @@
+---
+# tasks file for debian
+- name: Install UFW firewall
+  apt: 
+    name:
+     - ufw 
+    update_cache: yes 
+    state: present  
+  
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+
+- community.general.ufw:
+    rule: allow
+    name: OpenSSH
+    src: '{{ item }}'
+  loop: '{{ ufw_list_of_enabled_hosts }}'
+  become: true
+
+- name: Allow all access to list of tcp ports
+  community.general.ufw:
+    rule: allow
+    port: '{{ item }}'
+    proto: tcp
+  loop: '{{ ufw_list_of_opened_ports }}'
+  become: true
+
+- name: Allow bserv all access to host
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop: '{{ ufw_bserv_hosts }}'
+  become: true
+
+- name: Deny everything and enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: deny
+  become: true
+
+- name: Deny all IPv6 traffic on this host
+  # this should be the first IPv6 rule
+  community.general.ufw:
+    rule: deny
+    to_ip: "::"
+    insert: 0
+    insert_relative_to: first-ipv6
+  become: true

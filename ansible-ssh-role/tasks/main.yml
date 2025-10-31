@@ -1,0 +1,19 @@
+---
+- name: Disable root access via ssh
+  lineinfile: 
+    dest: /etc/ssh/sshd_config
+    regexp: ^#?PermitRootLogin
+    line: PermitRootLogin no
+
+- name: Disable password authentication
+  lineinfile: 
+    dest: /etc/ssh/sshd_config
+    regexp: ^#?PasswordAuthentication
+    line: PasswordAuthentication no
+    
+- name: Set port 58888 for ssh connection
+  lineinfile: 
+    dest: /etc/ssh/sshd_config
+    regexp: ^#?Port
+    line: Port 58888
+  notify: reload service sshd

@@ -1,0 +1,25 @@
+- name: Install firewalld package
+  yum:
+    name: firewalld
+    state: present
+
+- name: firewall activated
+  firewalld:
+    zone: public
+    interface: '{{ ansible_default_ipv4.interface }}'
+    permanent: true
+    state: enabled
+
+- name: allow services 
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop: '{{ firewall_services_redhat }}'
+
+- name: allow ports 
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop: '{{ firewall_ports_redhat }}'
