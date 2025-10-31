@@ -1,0 +1,18 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+# auto lo
+# iface lo inet loopback
+network:
+  version: 2
+  ethernets:
+    {{ static_ip_interface_name }}:
+      dhcp4: false
+      addresses:
+        - {{ static_ip_address }}/{{ static_ip_netmask }}
+      routes: 
+        - to: default
+          via: {{ static_ip_gateway }}
+      nameservers:
+        addresses: [{{ static_ip_dns }}]

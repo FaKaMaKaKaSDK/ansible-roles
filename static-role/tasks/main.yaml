@@ -1,0 +1,15 @@
+---
+- name: create static ip
+  template:
+    src: ../templates/interfaces.j2
+    dest: "{{ static_ip_dest_config }}"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: applying_netplan 
+  ansible.builtin.command:
+    argv: 
+      - netplan 
+      - apply
+   

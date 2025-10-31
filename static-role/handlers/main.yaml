@@ -1,0 +1,11 @@
+---
+#- name: Reboot network
+#  service:
+#    name: networking
+#    state: restarted
+
+- name: Applying Netplan Configuration
+  command: netplan apply
+  listen: netplan apply config
+  become: true
+  when: netplan_apply
