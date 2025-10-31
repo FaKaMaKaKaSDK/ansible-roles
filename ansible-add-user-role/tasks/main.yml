@@ -1,0 +1,32 @@
+---
+- name: Add the user 'bee' with password
+  ansible.builtin.user:
+    name: bee
+    comment: bee
+    shell: /bin/bash
+    create_home: yes
+    password: "{{ bee_pass | password_hash('sha512')}}"
+    force: yes
+
+- name: Add the user 'ansible' with password
+  ansible.builtin.user:
+    name: ansible
+    comment: ansible
+    shell: /bin/bash
+    create_home: yes
+    password: "{{ ansible_pass | password_hash('sha512')}}"
+    force: yes
+
+- name: Update Root user's Password
+  ansible.builtin.user:
+    name: root
+    update_password: always
+    password: "{{ root_pass | password_hash('sha512') }}"
+
+- name: Allow 'ansible' to have NOPASSWD sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: 'ansible'
+    line: 'ansible ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s

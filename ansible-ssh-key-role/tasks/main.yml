@@ -1,0 +1,33 @@
+---
+- name: Set up multiple authorized keys for bee
+  authorized_key:
+    user: bee
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - files/pavlik.pub
+    - files/petyaev.pub
+    - files/turkov.pub
+    - files/fedorin.pub
+
+- name: Set up multiple authorized keys for root
+  authorized_key:
+    user: root
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - files/pavlik.pub
+    - files/petyaev.pub
+    - files/turkov.pub
+    - files/fedorin.pub
+
+- name: Set up multiple authorized keys for ansible
+  authorized_key:
+    user: ansible
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - files/pavlik.pub
+    - files/petyaev.pub
+    - files/turkov.pub
+    - files/fedorin.pub
